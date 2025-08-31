@@ -24,4 +24,9 @@ class BiodataController
             include "views/biodata/create.php";
         }
     }
+
+    public function edit($data)
+    {
+        var_dump($data);
+    }
 }
