@@ -1,47 +1,27 @@
 <?php
-include "models/Biodata.php";
+require_once "models/Biodata.php";
 
 class BiodataController
 {
     private $model;
-
-    public function __construct($db)
+    public function __construct($conn)
     {
-        $this->model = new Biodata($db);
+        $this->model = new Biodata($conn);
     }
 
     public function index()
     {
-        $result = $this->model->getAll();
-        include "views/list.php";
+        $data = $this->model->getAll();
+        include "views/biodata/index.php";
     }
 
-    public function createForm()
+    public function create($request = [])
     {
-        include "views/form.php";
-    }
-
-    public function store($nama, $umur, $hobi)
-    {
-        $this->model->create($nama, $umur, $hobi);
-        header("Location: index.php");
-    }
-
-    public function editForm($id)
-    {
-        $data = $this->model->getById($id);
-        include "views/edit.php";
-    }
-
-    public function update($id, $nama, $umur, $hobi)
-    {
-        $this->model->update($id, $nama, $umur, $hobi);
-        header("Location: index.php");
-    }
-
-    public function delete($id)
-    {
-        $this->model->delete($id);
-        header("Location: index.php");
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->model->create($request['nama'], $request['umur'], $request['hobi']);
+            header("Location: index.php?controller=biodata&action=index");
+        } else {
+            include "views/biodata/create.php";
+        }
     }
 }
