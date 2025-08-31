@@ -13,3 +13,6 @@ spl_autoload_register(function ($class) {
         }
     }
 });
+
+// tambahin ini biar helpers langsung kebaca
+require_once __DIR__ . "/core/helpers.php";

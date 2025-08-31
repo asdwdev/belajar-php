@@ -19,7 +19,12 @@ class BiodataController
             "hobi" => "ngoding"
         ];
 
-        View::render("biodata.index", $data);
+        return view("biodata.index", $data);
+    }
+
+    public function store()
+    {
+        redirect(url("biodata"));
     }
 
     // public function create($request = [])
