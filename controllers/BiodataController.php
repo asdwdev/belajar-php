@@ -13,10 +13,15 @@ class BiodataController
 
     public function index()
     {
+        $nama = request()->get('nama', 'guest');
+        $hobi = request()->post('hobi', 'tidur');
+        $method = request()->method();
+
         $data = [
             "title" => "halaman biodata",
             "nama" => "arya",
-            "hobi" => "ngoding"
+            "hobi" => "ngoding",
+            'method' => $method
         ];
 
         return view("biodata.index", $data);

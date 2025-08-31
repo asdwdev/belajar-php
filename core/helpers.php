@@ -23,3 +23,12 @@ if (!function_exists("url")) {
         return $protocol . "://" . $host . $scriptName . "/" . ltrim($path, "/");
     }
 }
+
+function request()
+{
+    static $request = null;
+    if ($request === null) {
+        $request = new Request();
+    }
+    return $request;
+}
