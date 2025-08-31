@@ -10,6 +10,11 @@ include "controllers/UserController.php";
 $router = new Router();
 
 // ---- daftar route ----
+// root
+$router->add('GET', '', function () {
+    return view("welcome");
+});
+
 
 // biodata
 $router->add('GET', 'biodata', function () use ($conn) {
