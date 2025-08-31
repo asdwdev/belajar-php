@@ -1,6 +1,7 @@
 <?php
 include "koneksi.php";
 include "Router.php";
+require_once "autoload.php";
 
 // include semua controller
 include "controllers/BiodataController.php";
