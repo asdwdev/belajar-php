@@ -1,5 +1,5 @@
 <?php
-if (!function_exists("redirect")) {
+if (!function_exists("view")) {
     function view($view, $data = [])
     {
         return View::render($view, $data);
@@ -10,6 +10,7 @@ if (!function_exists("redirect")) {
     function redirect($url)
     {
         header("location: " . $url);
+        exit;
     }
 }
 
