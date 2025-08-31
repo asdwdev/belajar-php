@@ -1,22 +1,37 @@
 <?php
 include "koneksi.php";
-// Ambil path dari URL, misal: user/edit/3
-$path = $_GET['path'] ?? '';
-$parts = explode('/', trim($path, '/'));
+include "Router.php";
 
-$controllerName = $parts[0] ?? '';
-$controllerName = $controllerName !== '' ? $controllerName : 'biodata';
+// include semua controller
+include "controllers/BiodataController.php";
+include "controllers/UserController.php";
 
-$action = $parts[1] ?? 'index';
-$id = $parts[2] ?? null;
+$router = new Router();
 
-$controllerClass = ucfirst($controllerName) . "Controller";
-include "controllers/$controllerClass.php";
+// ---- daftar route ----
 
-$controller = new $controllerClass($conn);
+// biodata
+$router->add('GET', 'biodata', function () use ($conn) {
+    $controller = new BiodataController($conn);
+    $controller->index();
+});
 
-if (method_exists($controller, $action)) {
-    $controller->$action(['id' => $id]);
-} else {
-    echo "Action $action tidak ditemukan di $controllerClass";
-}
+$router->add('GET', 'biodata/create', function () use ($conn) {
+    $controller = new BiodataController($conn);
+    $controller->createForm();
+});
+
+$router->add('POST', 'biodata/store', function () use ($conn) {
+    $controller = new BiodataController($conn);
+    $controller->store($_POST['nama'], $_POST['umur'], $_POST['hobi']);
+});
+
+// user
+$router->add('GET', 'user', function () use ($conn) {
+    $controller = new UserController($conn);
+    $controller->index();
+});
+
+// -----------------------
+
+$router->dispatch('/belajar-php'); // base path project kamu
