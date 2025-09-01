@@ -1,6 +1,6 @@
 <?php
 
-require_once "models/Biodata.php";
+require_once "../models/Biodata.php";
 // require_once "core/View.php";
 
 class BiodataController

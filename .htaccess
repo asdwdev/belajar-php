@@ -1,8 +1,9 @@
-RewriteEngine On
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /belajar-php/
 
-# Kalau file atau folder fisik ada, jangan diubah
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
 
-# Ubah semua request jadi index.php
-RewriteRule ^(.*)$ index.php?path=$1 [L,QSA]
+    RewriteRule ^ public/index.php [L]
+</IfModule>
