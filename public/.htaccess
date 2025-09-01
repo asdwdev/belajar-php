@@ -1,0 +1,13 @@
+# /public/.htaccess
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /belajar-php/public/
+
+  # Kalau file/folder fisik ada, langsung sajikan
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Selain itu, lempar ke index.php (router kamu)
+  RewriteRule ^ index.php [L]
+</IfModule>

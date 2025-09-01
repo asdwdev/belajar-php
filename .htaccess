@@ -1,9 +1,12 @@
+# /.htaccess (ROOT project)
 <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /belajar-php/
+  RewriteEngine On
+  RewriteBase /belajar-php/
 
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
+  # Kalau belum berada di /public, lempar ke /public
+  RewriteCond %{REQUEST_URI} !^/belajar-php/public/
+  RewriteRule ^(.*)$ public/$1 [L,QSA]
 
-    RewriteRule ^ public/index.php [L]
+  # Matikan directory listing biar gak tampil "Index of ..."
+  Options -Indexes
 </IfModule>
