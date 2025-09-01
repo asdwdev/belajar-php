@@ -6,6 +6,14 @@ require_once __DIR__ . '/../core/Request.php';
 require_once __DIR__ . '/../core/Route.php';
 require_once __DIR__ . '/../core/View.php';
 
+// Tambahkan Composer autoload (supaya bisa pakai vlucas/phpdotenv)
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Load .env file
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
+// Autoload controllers & models
 spl_autoload_register(function ($class) {
     $paths = [
         __DIR__ . '/../controllers/' . $class . '.php',
