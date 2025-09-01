@@ -1,42 +1,20 @@
 <?php
 include "koneksi.php";
-include "Router.php";
+include "Route.php";
 require_once "autoload.php";
 
 // include semua controller
 include "controllers/BiodataController.php";
 include "controllers/UserController.php";
 
-$router = new Router();
+$router = new Route();
 
 // ---- daftar route ----
-// root
-$router->add('GET', '', function () {
+Route::get('', function () {
     return view("welcome");
 });
 
-
-// biodata
-$router->add('GET', 'biodata', function () use ($conn) {
-    $controller = new BiodataController($conn);
-    $controller->index();
-});
-
-$router->add('GET', 'biodata/create', function () use ($conn) {
-    $controller = new BiodataController($conn);
-    $controller->createForm();
-});
-
-$router->add('POST', 'biodata/store', function () use ($conn) {
-    $controller = new BiodataController($conn);
-    $controller->store($_POST['nama'], $_POST['umur'], $_POST['hobi']);
-});
-
-// user
-$router->add('GET', 'user', function () use ($conn) {
-    $controller = new UserController($conn);
-    $controller->index();
-});
+Route::get('biodata', [BiodataController::class, 'index']);
 
 // -----------------------
 
