@@ -26,6 +26,13 @@ class Route
     {
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+        // kalau basePath kosong → ambil folder project, bukan /public
+        if ($basePath === '') {
+            $scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
+            $basePath   = str_replace('/public/index.php', '', $scriptName);
+            $basePath   = rtrim($basePath, '/');
+        }
+
         if ($basePath && strpos($uri, $basePath) === 0) {
             $uri = substr($uri, strlen($basePath));
         }

@@ -1,10 +1,8 @@
 <?php
-include "../koneksi.php";
-include "../core/Route.php";
-require_once "../autoload.php";
 
-// load route definitions
-include "../routes/web.php";
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../bootstrap/autoload.php';
+require_once __DIR__ . '/../routes/web.php';
 
-// setelah include routes, langsung jalanin dispatcher
-Route::dispatch('/belajar-php');
+// sekarang gak perlu hardcode
+Route::dispatch();
